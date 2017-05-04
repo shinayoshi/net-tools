@@ -6,8 +6,7 @@ class NetToolsUtil {
         return filter_var($ipaddr, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4);
     }
     public function isHostname($hostname) {
-        // ToDo check hostname
-        return false;
+        return $this->isIPAddress(gethostbyname($hostname));
     }
 }
 ?>

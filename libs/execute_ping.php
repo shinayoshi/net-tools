@@ -4,7 +4,7 @@ header('Content-Type: text/plain');
 require(dirname(__FILE__).'/NetToolsUtil.class.php');
 
 $hostname = htmlspecialchars($_POST['hostname']);
-$result = "result";
+$result = "";
 
 $ntu = new NetToolsUtil();
 if ($ntu->isIPAddress($hostname) || $ntu->isHostname($hostname)) {
