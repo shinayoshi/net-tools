@@ -40,6 +40,8 @@
               <hr />
               <h2>Result</h2>
               <div id="result"></div>
+              <hr />
+              <p><a href="index.php">Return top</a></p>
             </div>
           </div>
         </div>
