@@ -24,6 +24,18 @@ if ($command === 'ping') {
     } else {
         $array['result'] = $hostname . ' is not FQDN/IP Address';
     }
+} else if ($command === 'dig') {
+    if ($ntu->isIPAddress($hostname)) {
+        $cmd = 'dig -x ' . $hostname;
+        $array['command'] = $cmd;
+        $array['result'] = shell_exec($cmd);
+    } else if ($ntu->isHostname($hostname)) {
+        $cmd = 'dig ' . $hostname;
+        $array['command'] = $cmd;
+        $array['result'] = shell_exec($cmd);
+    } else {
+        $array['result'] = $hostname . ' is not FQDN/IP Address';
+    }
 } else {
         $array['result'] = 'Unknown command: ' . $command;
 }
