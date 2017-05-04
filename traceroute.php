@@ -8,7 +8,7 @@
     <meta name="description" content="shinayoshi shinayoshi.net" />
     <meta name="author" content="shinayoshi" />
 
-    <title>Top - net-tools</title>
+    <title>Traceroute - net-tools</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,11 +28,18 @@
           <div class="row">
             <div class="page-content col-md-12">
               <h1>net-tools</h1>
-              <p>Your ip address is <?php echo $_SERVER["REMOTE_ADDR"]; ?></p>
-              <ul>
-                <li><a href="ping.php">ping</a></li>
-                <li><a href="traceroute.php">traceroute</a></li>
-              </ul>
+              <h2>Traceroute</h2>
+              <form class="form-inline" action="#">
+                <input type="hidden" id="command" value="traceroute" />
+                <div class="form-group">
+                  <label class="sr-only" for="hostname">FQDN or IP Address</label>
+                  <input type="text" class="form-control" id="hostname" placeholder="FQDN or IP Address" name="hostname" tabindex="1" />
+                </div>
+                <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
+              </form>
+              <hr />
+              <h2>Result</h2>
+              <div id="result"></div>
             </div>
           </div>
         </div>
@@ -59,5 +66,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/net-tools.js"></script>
   </body>
 </html>
