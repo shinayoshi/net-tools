@@ -27,7 +27,7 @@ $(function () {
         $.ajax({
             url: 'libs/command.php',
             type: 'post', // getかpostを指定(デフォルトは前者)
-            dataType: 'text', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
+            dataType: 'json', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
             data: { // 送信データを指定(getの場合は自動的にurlの後ろにクエリとして付加される)
                 command: $('#command').val(),
                 hostname: $('#hostname').val()
@@ -36,7 +36,10 @@ $(function () {
         // ・ステータスコードは正常で、dataTypeで定義したようにパース出来たとき
         .done(function (response) {
 	    $('#result').empty();
-	    $('<pre>'+response+'</pre>').appendTo('#result');
+        if (response.command) {
+	        $('<pre>execute: '+response.command+'</pre>').appendTo('#result');
+        }
+	    $('<pre>'+response.result+'</pre>').appendTo('#result');
         })
         // ・サーバからステータスコード400以上が返ってきたとき
         // ・ステータスコードは正常だが、dataTypeで定義したようにパース出来なかったとき
