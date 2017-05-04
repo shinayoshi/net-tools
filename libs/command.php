@@ -1,5 +1,5 @@
 <?php
-header('Content-Type: text/plain');
+header('Content-Type: application/json; charset=utf-8');
 
 require(dirname(__FILE__).'/NetToolsUtil.class.php');
 
