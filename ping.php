@@ -28,8 +28,9 @@
           <div class="row">
             <div class="page-content col-md-12">
               <h1>net-tools</h1>
-	      <h2>Ping</h2>
+      <h2>Ping</h2>
               <form class="form-inline" action="#">
+                <input type="hidden" id="command" value="ping" />
                 <div class="form-group">
                   <label class="sr-only" for="hostname">FQDN or IP Address</label>
                   <input type="text" class="form-control" id="hostname" placeholder="FQDN or IP Address" name="hostname" tabindex="1" />
@@ -37,18 +38,18 @@
                 <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
               </form>
               <hr />
-	      <h2>Result</h2>
-	      <div id="result_ping"></div>
-	    </div>
-	  </div>
-	</div>
+              <h2>Result</h2>
+              <div id="result"></div>
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <hr />
-	  </div>
+          </div>
         </div>
       </div>
 
@@ -56,7 +57,7 @@
         <div class="container">
           <p class="text-muted credits">
             Copyright (c) 2017 shinayoshi
-	  </p>
+          </p>
         </div>
       </footer>
     </div>
