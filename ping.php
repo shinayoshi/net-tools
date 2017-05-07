@@ -32,7 +32,7 @@
               <form class="form-inline" action="#">
                 <input type="hidden" id="command" value="ping" />
                 <div class="form-group" id="captcha_auth">
-                  <img id="captcha" src="./securimage/securimage_show.php" alt="captcha" /><br /> 
+                  <img id="captcha" src="./securimage/securimage_show.php" alt="captcha" width="135" height="50" /><br /> 
                   <input type="text" class="form-control" id="captcha_code" placeholder="Input CAPTCHA image text" name="captcha" tabindex="1" />
                 </div>
                 <br />
