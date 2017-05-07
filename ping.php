@@ -40,7 +40,7 @@
                   <label class="sr-only" for="hostname">FQDN or IP Address</label>
                   <input type="text" class="form-control" id="hostname" placeholder="FQDN or IP Address" name="hostname" tabindex="2" />
                 </div>
-                <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
+                <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="3" />
               </form>
               <hr />
               <h2>Result</h2>
