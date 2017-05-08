@@ -1,6 +1,13 @@
 <?php
 class NetToolsUtil {
-    public function __construct() {
+    private $ping = '';
+    private $traceroute = '';
+    private $dig = '';
+    public function __construct($ini_file) {
+        $ini = parse_ini_file($ini_file);
+        $this->ping = $ini['ping'].' '.$ini['ping_option'];
+        $this->traceroute = $ini['traceroute'].' '.$ini['traceroute_option'];
+        $this->dig = $ini['dig'].' '.$ini['dig_option'];
     }
     public function execute($command, $hostname) {
         $result = null; 
@@ -22,8 +29,8 @@ class NetToolsUtil {
     private function executePing($hostname) {
         $array = array('command'=>'', 'result'=>'');
         if ($this->isIPAddress($hostname) || $this->isHostname($hostname)) {
-            $cmd = 'ping -c 4 ' . $hostname;
-            $array['command'] = $cmd;
+            $cmd = $this->ping.' '.$hostname;
+            $array['command'] = $this->getBasename($cmd);
             $array['result'] = shell_exec($cmd);
         } else {
             $array['result'] = $hostname . ' is not FQDN/IP Address.';
@@ -33,8 +40,8 @@ class NetToolsUtil {
     private function executeTraceroute($hostname) {
         $array = array('command'=>'', 'result'=>'');
         if ($this->isIPAddress($hostname) || $this->isHostname($hostname)) {
-            $cmd = 'traceroute ' . $hostname;
-            $array['command'] = $cmd;
+            $cmd = $this->traceroute.' '.$hostname;
+            $array['command'] = $this->getBasename($cmd);
             $array['result'] = shell_exec($cmd);
         } else {
             $array['result'] = $hostname . ' is not FQDN/IP Address.';
@@ -44,12 +51,12 @@ class NetToolsUtil {
     private function executeDig($hostname) {
         $array = array('command'=>'', 'result'=>'');
         if ($this->isIPAddress($hostname)) {
-            $cmd = 'dig -x ' . $hostname;
-            $array['command'] = $cmd;
+            $cmd = $this->dig.' -x '.$hostname;
+            $array['command'] = $this->getBasename($cmd);
             $array['result'] = shell_exec($cmd);
         } else if ($this->isHostname($hostname)) {
-            $cmd = 'dig ' . $hostname;
-            $array['command'] = $cmd;
+            $cmd = $this->dig.' '.$hostname;
+            $array['command'] = $this->getBasename($cmd);
             $array['result'] = shell_exec($cmd);
         } else {
             $array['result'] = $hostname . ' is not FQDN/IP Address.';
@@ -61,6 +68,15 @@ class NetToolsUtil {
     }
     private function isHostname($hostname) {
         return $this->isIPAddress(gethostbyname($hostname));
+    }
+    private function getBasename($cmd) {
+        $tmp = '';
+        if (strpos($cmd, '/') !== false) {
+            $tmp = substr(strrchr($cmd, "/"), 1);
+        } else {
+            $tmp = $cmd;
+        }
+        return $tmp;
     }
 }
 ?>
