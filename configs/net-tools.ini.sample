@@ -1,0 +1,10 @@
+[command]
+ping = "Path to ping command"
+ping_option = "-c 4"
+
+traceroute = "Path to traceroute command"
+traceroute_option = ""
+
+dig = "Path to dig command"
+dig_option = ""
+
