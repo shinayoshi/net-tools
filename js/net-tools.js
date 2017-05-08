@@ -30,7 +30,6 @@ $(function () {
             dataType: 'json', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
             data: { // 送信データを指定(getの場合は自動的にurlの後ろにクエリとして付加される)
                 command: $('#command').val(),
-                captcha_code: $('#captcha_code').val(),
                 hostname: $('#hostname').val()
             }
         })
@@ -41,9 +40,6 @@ $(function () {
 	            $('<pre>execute: '+response.command+'</pre>').appendTo('#result');
             }
 	        $('<pre>'+response.result+'</pre>').appendTo('#result');
-            if (response.captcha_auth) {
-                $('#captcha_auth').hide();
-            }
         })
         // ・サーバからステータスコード400以上が返ってきたとき
         // ・ステータスコードは正常だが、dataTypeで定義したようにパース出来なかったとき
