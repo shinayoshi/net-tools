@@ -40,6 +40,7 @@ $(function () {
                 $('#result').addClass('alert alert-success');
                 $('<p>CAPTCHA authentication is success.</p>').appendTo('#result');
             } else {
+		$('#captcha').attr('src', './securimage/securimage_show.php?'+Math.random());
                 $('#result').addClass('alert alert-warning');
                 $('<p>CAPTCHA authentication is failure.</p>').appendTo('#result');
             }
