@@ -1,3 +1,7 @@
+<?php
+session_start();
+$captcha_auth = $_SESSION['captcha_auth'];
+?>
 <!DOCTYPE html>
 <html lang="ja">
   <head>
@@ -29,7 +33,8 @@
             <div class="page-content col-md-12">
               <h1>net-tools</h1>
               <p>Your ip address is <?php echo $_SERVER["REMOTE_ADDR"]; ?></p>
-	      <div id="result"></div>
+              <div id="result"></div>
+              <?php if (!$captcha_auth) { ?>
               <form class="form-inline" action="#" id="captcha_auth">
                 <div class="form-group">
                   <img id="captcha" src="./securimage/securimage_show.php" alt="captcha" width="135" height="50" /><br />
@@ -37,7 +42,12 @@
                   <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
                 </div>
               </form>
-              <ul>
+              <?php } ?>
+              <?php if (!$captcha_auth) { ?>
+              <ul id="command" style="display: none;">
+              <?php } else { ?>
+              <ul id="command">
+              <?php } ?>
                 <li><a href="ping.php">ping</a></li>
                 <li><a href="traceroute.php">traceroute</a></li>
                 <li><a href="dig.php">dig</a></li>

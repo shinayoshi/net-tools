@@ -37,10 +37,12 @@ $(function () {
             $('#result').empty();
             if (response.captcha_auth) {
                 $('#captcha_auth').hide();
+                $('#command').show();
                 $('#result').addClass('alert alert-success');
                 $('<p>CAPTCHA authentication is success.</p>').appendTo('#result');
             } else {
-		$('#captcha').attr('src', './securimage/securimage_show.php?'+Math.random());
+                $('#captcha').attr('src', './securimage/securimage_show.php?'+Math.random());
+                $('#captcha_code').val('');
                 $('#result').addClass('alert alert-warning');
                 $('<p>CAPTCHA authentication is failure.</p>').appendTo('#result');
             }
