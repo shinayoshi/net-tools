@@ -29,6 +29,14 @@
             <div class="page-content col-md-12">
               <h1>net-tools</h1>
               <p>Your ip address is <?php echo $_SERVER["REMOTE_ADDR"]; ?></p>
+	      <div id="result"></div>
+              <form class="form-inline" action="#" id="captcha_auth">
+                <div class="form-group">
+                  <img id="captcha" src="./securimage/securimage_show.php" alt="captcha" width="135" height="50" /><br />
+                  <input type="text" class="form-control" id="captcha_code" placeholder="Input CAPTCHA text" name="captcha" tabindex="1" />
+                  <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
+                </div>
+              </form>
               <ul>
                 <li><a href="ping.php">ping</a></li>
                 <li><a href="traceroute.php">traceroute</a></li>
@@ -60,5 +68,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/captcha.js"></script>
   </body>
 </html>

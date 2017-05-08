@@ -25,21 +25,25 @@ $(function () {
     $('#execute').click(function (e) {
         // Ajax通信を開始する
         $.ajax({
-            url: 'libs/command.php',
+            url: 'libs/captcha.php',
             type: 'post', // getかpostを指定(デフォルトは前者)
             dataType: 'json', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
             data: { // 送信データを指定(getの場合は自動的にurlの後ろにクエリとして付加される)
-                command: $('#command').val(),
-                hostname: $('#hostname').val()
+                captcha_code: $('#captcha_code').val()
             }
         })
         // ・ステータスコードは正常で、dataTypeで定義したようにパース出来たとき
         .done(function (response) {
-	        $('#result').empty();
-            if (response.command) {
-	            $('<pre>execute: '+response.command+'</pre>').appendTo('#result');
+            $('#result').empty();
+            if (response.captcha_auth) {
+                $('#captcha_auth').hide();
+                $('#result').addClass('alert alert-success');
+                $('<p>CAPTCHA authentication is success.</p>').appendTo('#result');
+            } else {
+		$('#captcha').attr('src', './securimage/securimage_show.php?'+Math.random());
+                $('#result').addClass('alert alert-warning');
+                $('<p>CAPTCHA authentication is failure.</p>').appendTo('#result');
             }
-	        $('<pre>'+response.result+'</pre>').appendTo('#result');
         })
         // ・サーバからステータスコード400以上が返ってきたとき
         // ・ステータスコードは正常だが、dataTypeで定義したようにパース出来なかったとき
@@ -50,7 +54,7 @@ $(function () {
             $('#result').text(errorHandler(arguments));
         });
     });
-    $('#hostname').on("keypress", function(e){
+    $('#captcha_code').on("keypress", function(e){
         if (e.keyCode === 13) {
             $('#execute').click();
             return e.which !== 13;
