@@ -37,7 +37,7 @@ $captcha_auth = $_SESSION['captcha_auth'];
               <?php if (!$captcha_auth) { ?>
               <form class="form-inline" action="#" id="captcha_auth">
                 <div class="form-group">
-                  <img id="captcha" src="./securimage/securimage_show.php" alt="captcha" width="135" height="50" /><br />
+                  <img id="captcha" src="./securimage/securimage_show.php" alt="captcha" width="220" height="80" /><br />
                   <input type="text" class="form-control" id="captcha_code" placeholder="Input CAPTCHA text" name="captcha" tabindex="1" />
                   <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
                 </div>
