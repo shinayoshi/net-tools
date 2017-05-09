@@ -23,6 +23,8 @@ function errorHandler(args) {
 $(function () {
     // 「#execute」をクリックしたとき
     $('#execute').click(function (e) {
+        $('#hostname').prop('disabled', true);
+        $('#execute').prop('disabled', true);
         // Ajax通信を開始する
         $.ajax({
             url: 'command.php',
@@ -40,7 +42,9 @@ $(function () {
 	            $('<pre>execute: '+response.command+'</pre>').appendTo('#result');
             }
 	        $('<pre>'+response.result+'</pre>').appendTo('#result');
-        })
+            $('#hostname').prop('disabled', false);
+            $('#execute').prop('disabled', false);
+         })
         // ・サーバからステータスコード400以上が返ってきたとき
         // ・ステータスコードは正常だが、dataTypeで定義したようにパース出来なかったとき
         // ・通信に失敗したとき
@@ -48,7 +52,9 @@ $(function () {
             // jqXHR, textStatus, errorThrown と書くのは長いので、argumentsでまとめて渡す
             // (PHPのfunc_get_args関数の返り値のようなもの)
             $('#result').text(errorHandler(arguments));
-        });
+            $('#hostname').prop('disabled', false);
+            $('#execute').prop('disabled', false);
+         });
     });
     $('#hostname').on("keypress", function(e){
         if (e.keyCode === 13) {
