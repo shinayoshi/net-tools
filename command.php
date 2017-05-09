@@ -1,11 +1,11 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-require_once(dirname(__FILE__).'/NetToolsUtil.class.php');
+require_once(dirname(__FILE__).'/libs/NetToolsUtil.class.php');
 
 session_start();
 
-$ini_file = '../configs/net-tools.ini';
+$ini_file = './configs/net-tools.ini';
 $captcha_auth = $_SESSION['captcha_auth'];
 $command = htmlspecialchars($_POST['command']);
 $hostname = htmlspecialchars($_POST['hostname']);
