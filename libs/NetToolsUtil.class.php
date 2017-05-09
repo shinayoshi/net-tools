@@ -5,9 +5,21 @@ class NetToolsUtil {
     private $dig = '';
     public function __construct($ini_file) {
         $ini = parse_ini_file($ini_file);
-        $this->ping = $ini['ping'].' '.$ini['ping_option'];
-        $this->traceroute = $ini['traceroute'].' '.$ini['traceroute_option'];
-        $this->dig = $ini['dig'].' '.$ini['dig_option'];
+        if (file_exists($ini['ping'])) {
+            $this->ping = $ini['ping'].' '.$ini['ping_option'];
+        } else {
+            $this->ping = '';
+        }
+        if (file_exists($ini['traceroute'])) {
+            $this->traceroute = $ini['traceroute'].' '.$ini['traceroute_option'];
+        } else {
+            $this->ping = '';
+        }
+        if (file_exists($ini['dig'])) {
+            $this->dig = $ini['dig'].' '.$ini['dig_option'];
+        } else {
+            $this->ping = '';
+        }
     }
     public function execute($command, $hostname) {
         $result = null; 
@@ -28,6 +40,11 @@ class NetToolsUtil {
     }
     private function executePing($hostname) {
         $array = array('command'=>'', 'result'=>'');
+        if ($this->ping === '') {
+            $array['result'] = 'command not found';
+            return $array;
+        }
+
         if ($this->isIPAddress($hostname) || $this->isHostname($hostname)) {
             $cmd = $this->ping.' '.$hostname;
             $array['command'] = $this->getBasename($cmd);
@@ -39,6 +56,11 @@ class NetToolsUtil {
     }
     private function executeTraceroute($hostname) {
         $array = array('command'=>'', 'result'=>'');
+        if ($this->traceroute === '') {
+            $array['result'] = 'command not found';
+            return $array;
+        }
+
         if ($this->isIPAddress($hostname) || $this->isHostname($hostname)) {
             $cmd = $this->traceroute.' '.$hostname;
             $array['command'] = $this->getBasename($cmd);
@@ -50,6 +72,11 @@ class NetToolsUtil {
     }
     private function executeDig($hostname) {
         $array = array('command'=>'', 'result'=>'');
+        if ($this->dig === '') {
+            $array['result'] = 'command not found';
+            return $array;
+        }
+
         if ($this->isIPAddress($hostname)) {
             $cmd = $this->dig.' -x '.$hostname;
             $array['command'] = $this->getBasename($cmd);
