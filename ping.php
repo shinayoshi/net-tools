@@ -41,7 +41,7 @@
               <h2>Result</h2>
               <div id="result"></div>
               <hr />
-              <p><a href="index.php">Return to top</a></p>
+              <p><a href="./index">Return to top</a></p>
             </div>
           </div>
         </div>

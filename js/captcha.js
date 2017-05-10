@@ -25,7 +25,7 @@ $(function () {
     $('#execute').click(function (e) {
         // Ajax通信を開始する
         $.ajax({
-            url: 'captcha.php',
+            url: './captcha',
             type: 'post', // getかpostを指定(デフォルトは前者)
             dataType: 'json', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
             data: { // 送信データを指定(getの場合は自動的にurlの後ろにクエリとして付加される)
@@ -41,7 +41,7 @@ $(function () {
                 $('#result').addClass('alert alert-success');
                 $('<p>CAPTCHA authentication is success.</p>').appendTo('#result');
             } else {
-                $('#captcha').attr('src', './securimage/securimage_show.php?'+Math.random());
+                $('#captcha').attr('src', './securimage/securimage_show?'+Math.random());
                 $('#captcha_code').val('');
                 $('#result').addClass('alert alert-warning');
                 $('<p>CAPTCHA authentication is failure.</p>').appendTo('#result');
