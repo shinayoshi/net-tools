@@ -5,3 +5,9 @@ Options -Indexes
   Deny from all
 </FilesMatch>
 
+RewriteEngine on
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+RewriteRule ^(.*)$ $1.php
+
