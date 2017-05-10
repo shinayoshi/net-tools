@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <configuration xmlns="http://logging.apache.org/log4php/">
     <appender name="default" class="LoggerAppenderRollingFile">
-        <layout class="LoggerLayoutSimple" />
+        <layout class="LoggerLayoutPattern">
+            <param name="conversionPattern" value="%date %logger %-5level %msg%n" />
+        </layout>
         <param name="file" value="logs/net-tools.log" />
         <param name="maxFileSize" value="1MB" />
         <param name="maxBackupIndex" value="5" />
