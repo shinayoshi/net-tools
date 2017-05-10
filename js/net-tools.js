@@ -27,7 +27,7 @@ $(function () {
         $('#execute').prop('disabled', true);
         // Ajax通信を開始する
         $.ajax({
-            url: 'command.php',
+            url: './command',
             type: 'post', // getかpostを指定(デフォルトは前者)
             dataType: 'json', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
             data: { // 送信データを指定(getの場合は自動的にurlの後ろにクエリとして付加される)
