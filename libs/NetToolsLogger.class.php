@@ -1,11 +1,11 @@
 <?php
 require_once(dirname(__FILE__).'/../log4php/Logger.php');
-Logger::configure(dirname(__FILE__).'/../configs/logging.xml');
 
 class NetToolsLogger {
     private static $instance = null;
     private $log = null;
     private function __construct() {
+        Logger::configure(dirname(__FILE__).'/../configs/logging.xml');
         $this->log = Logger::getLogger(__CLASS__);
     }
     final public static function getInstance() {
