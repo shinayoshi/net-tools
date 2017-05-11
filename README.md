@@ -14,5 +14,5 @@ It implements the following command.
 
 ## License
 
-This theme is released under the MIT license, see [LICENSE.md](LICENSE.md).
+This software is released under the MIT license, see [LICENSE.md](LICENSE.md).
 
