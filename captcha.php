@@ -10,6 +10,7 @@ $captcha_auth = $_SESSION['captcha_auth'];
 $securimage = new Securimage();
 if ($captcha_auth || $securimage->check($_POST['captcha_code'])) {
     $_SESSION['captcha_auth'] = true;
+    $_SESSION['auth_time'] = strtotime('now');
     $captcha_result = array('captcha_auth'=>true);
     echo json_encode($captcha_result);
 } else {
