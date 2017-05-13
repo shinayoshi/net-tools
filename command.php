@@ -8,8 +8,9 @@ session_start();
 
 $ini_file = './configs/net-tools.ini';
 $captcha_auth = $_SESSION['captcha_auth'];
-$nowtime = strtotime('now');
 $last_exec_time = $_SESSION['last_exec_time'];
+$auth_time = $_SESSION['auth_time'];
+$nowtime = strtotime('now');
 $client = $_SERVER['REMOTE_ADDR'];
 $command = htmlspecialchars($_POST['command']);
 $hostname = htmlspecialchars($_POST['hostname']);
@@ -17,9 +18,10 @@ $hostname = htmlspecialchars($_POST['hostname']);
 $logger = NetToolsLogger::getInstance();
 $logger->info('srcip: '.$client.', command: '.$command.', hostname: '.$hostname);
 
-if ($captcha_auth) {
+if ($captcha_auth && $nowtime - $auth_time <= 30*60) {
     if (!isset($last_exec_time) || $nowtime - $last_exec_time >= 1) {
         $_SESSION['last_exec_time'] = $nowtime;
+        $_SESSION['auth_time'] = $nowtime;
         $ntu = new NetToolsUtil($ini_file);
         $result = $ntu->execute($command, $hostname);
         echo json_encode($result);

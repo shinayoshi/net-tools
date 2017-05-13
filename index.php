@@ -1,6 +1,13 @@
 <?php
 session_start();
 $captcha_auth = $_SESSION['captcha_auth'];
+$auth_time = $_SESSION['auth_time'];
+$nowtime = strtotime('now');
+if ($captcha_auth && $nowtime - $auth_time <= 30*60) {
+    $captcha_auth = true;
+} else {
+    $captcha_auth = false;
+}
 ?>
 <!DOCTYPE html>
 <html lang="ja">
