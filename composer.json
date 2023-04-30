@@ -1,0 +1,6 @@
+{
+    "require": {
+        "dapphp/securimage": "^4.0",
+        "monolog/monolog": "^3.3"
+    }
+}
