@@ -25,6 +25,7 @@ $(function () {
     $('#execute').click(function (e) {
         $('#hostname').prop('disabled', true);
         $('#execute').prop('disabled', true);
+        $('#result').text('now executing...')
         // Ajax通信を開始する
         $.ajax({
             url: './command',
