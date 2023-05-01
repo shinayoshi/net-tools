@@ -2,4 +2,4 @@
 *~
 vendor
 
-logs/net-tools.log*
+logs/*.log
