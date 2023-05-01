@@ -29,7 +29,8 @@ $(function () {
             type: 'post', // getかpostを指定(デフォルトは前者)
             dataType: 'json', // 「json」を指定するとresponseがJSONとしてパースされたオブジェクトになる
             data: { // 送信データを指定(getの場合は自動的にurlの後ろにクエリとして付加される)
-                captcha_code: $('#captcha_code').val()
+                captcha_code: $('#captcha_code').val(),
+                captcha_id: $('#captcha_id').val()
             }
         })
         // ・ステータスコードは正常で、dataTypeで定義したようにパース出来たとき
@@ -38,11 +39,15 @@ $(function () {
             if (response.captcha_auth) {
                 $('#captcha_auth').hide();
                 $('#command').show();
+                $('#result').removeClass()
                 $('#result').addClass('alert alert-success');
                 $('<p>CAPTCHA authentication is success.</p>').appendTo('#result');
             } else {
-                $('#captcha').attr('src', './securimage/securimage_show?'+Math.random());
+                captcha_id = 'a'+Math.random()
+                $('#captcha').attr('src', './vendor/dapphp/securimage/securimage_show?id='+captcha_id);
                 $('#captcha_code').val('');
+                $('#captcha_id').val(captcha_id)
+                $('#result').removeClass()
                 $('#result').addClass('alert alert-warning');
                 $('<p>CAPTCHA authentication is failure.</p>').appendTo('#result');
             }

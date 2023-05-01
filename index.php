@@ -1,13 +1,24 @@
 <?php
 session_start();
-$captcha_auth = $_SESSION['captcha_auth'];
-$auth_time = $_SESSION['auth_time'];
+if (isset($_SESSION['captcha_auth'])) {
+    $captcha_auth = $_SESSION['captcha_auth'];
+} else {
+    $captcha_auth = false;
+}
+if (isset($_SESSION['auth_time'])) {
+    $auth_time = $_SESSION['auth_time'];
+} else {
+    $auth_time = null;
+}
+
 $nowtime = strtotime('now');
 if ($captcha_auth && $nowtime - $auth_time <= 30*60) {
     $captcha_auth = true;
 } else {
     $captcha_auth = false;
 }
+require_once('./vendor/autoload.php');
+$captcha_id = Securimage::generateCaptchaId()
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -44,8 +55,10 @@ if ($captcha_auth && $nowtime - $auth_time <= 30*60) {
               <?php if (!$captcha_auth) { ?>
               <form class="form-inline" action="#" id="captcha_auth">
                 <div class="form-group">
-                  <img id="captcha" src="./securimage/securimage_show" alt="captcha" width="220" height="80" /><br />
+                  <!-- <?php //require_once './vendor/autoload.php'; echo Securimage::getCaptchaHtml(array('input_name' => 'captcha_code')); ?><br /> -->
+                  <img id="captcha" src="./vendor/dapphp/securimage/securimage_show?id=<?php echo $captcha_id ?>" alt="captcha" width="220" height="80" /><br />
                   <input type="text" class="form-control" id="captcha_code" placeholder="Input CAPTCHA text" name="captcha" tabindex="1" />
+                  <input type="hidden" id="captcha_id" name="captcha_id" value="<?php echo $captcha_id ?>" /><br />
                   <input class="btn btn-default" type="button" id="execute" value="Submit" tabindex="2" />
                 </div>
               </form>

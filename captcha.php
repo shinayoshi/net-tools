@@ -1,11 +1,16 @@
 <?php
 header('Content-Type: application/json; charset=utf-8');
 
-require_once('./securimage/securimage.php');
+require_once('./vendor/autoload.php');
 
 session_start();
 
-$captcha_auth = $_SESSION['captcha_auth'];
+if (isset($_SESSION['captcha_auth'])) {
+    $captcha_auth = $_SESSION['captcha_auth'];
+} else {
+    $captcha_auth = false;
+}
+
 
 $securimage = new Securimage();
 if ($captcha_auth || $securimage->check($_POST['captcha_code'])) {
