@@ -1,5 +1,5 @@
 .DS_Store
 *~
-vendor
-
+configs/net-tools.ini
 logs/*.log
+vendor
